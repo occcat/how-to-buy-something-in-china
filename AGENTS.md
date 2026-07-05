@@ -43,14 +43,6 @@
 
 ## 技能加载顺序
 
-按阶段读取并使用 `skills/` 下的本地 Skill：
-
-1. `skills/01-needs-analysis/SKILL.md`：需求澄清、伪需求识别、最多 3 轮问答。
-2. `skills/02-env-check/SKILL.md`：macOS、ego lite、登录态缓存和 Sub Agent 授权检查。
-3. `skills/03-ego-scraper/SKILL.md`：免打扰网页访问、社媒平台、购买平台、比价平台数据采集和来源记录。
-4. `skills/04-selection-tables/SKILL.md`：候选集、配置表、优缺点表、价格表、未入选原因表。
-5. `skills/05-report-export/SKILL.md`：最终 Top 3、Markdown 报告和 PDF 导出。
-
 执行具体阶段前，读取对应 `SKILL.md`。若阶段引用脚本或参考文件，只读取本次需要的文件。
 
 ## 阶段 1：需求澄清与挖掘
