@@ -1,25 +1,30 @@
 ---
 name: 04-selection-tables
-description: Build structured Top 5 product comparison tables for China buying reports, including ranked specs with medals, linked pros and cons from real user evidence, linked price bands, glossary explanations, and defensible thresholds. Use after evidence collection.
+description: Build structured candidate comparison tables for China buying reports, including all qualified candidates up to 50 items, ranked specs with medals, linked pros and cons from real user evidence, linked price bands, exclusion reasons, glossary explanations, and defensible thresholds. Use after evidence collection.
 ---
 
 # 04 Selection Tables
 
 ## Purpose
 
-Use this skill after Top 5 candidates and source notes are collected. The output is the analysis core of the final report.
+Use this skill after the candidate universe, qualified candidate set, exclusion list, and source notes are collected. The output is the analysis core of the final report.
 
 ## Candidate Rules
 
-- Keep exactly Top 5 unless the category has fewer viable products or the user explicitly narrows the scope.
+- Include every candidate that satisfies the user’s hard constraints, up to 50 candidates.
+- If more than 50 candidates satisfy the hard constraints, keep the 50 best-supported matches and state the truncation rule.
 - Include the user’s named model when the request names one, even if it may not win.
-- If a candidate violates a hard constraint, remove it or mark why it is only a reference comparison.
+- If a longlist candidate violates a hard constraint, keep it out of the qualified candidate set and record the reason in the exclusion table.
 - Preserve source links from collection; do not invent links.
 - Preserve platform categories from collection: 社媒平台, 购买平台, 比价平台.
 
 ## Specs Table
 
-Create a Markdown table with products as columns and parameters as rows.
+Create a Markdown table that stays readable for the candidate count:
+
+- For 10 or fewer candidates, products may be columns and parameters may be rows.
+- For more than 10 candidates, prefer one row per product and columns for key metrics, or split candidates into pricing/positioning groups.
+- Do not drop qualified candidates merely to keep the table short.
 
 Required behavior:
 
@@ -35,6 +40,14 @@ Example shape:
 |---|---:|---:|---:|---:|---:|
 | 到手价 | 🥇 ¥2999 | 🥈 ¥3299 | 🥉 ¥3499 | ¥3999 | ¥4299 |
 | 重量 | 🥈 190g | 🥇 184g | 205g | 🥉 193g | 210g |
+```
+
+Large-candidate example:
+
+```markdown
+| 产品 | 定位 | 到手价 | 关键参数 | 主要优势 | 主要风险 |
+|---|---|---:|---|---|---|
+| 产品 A | 主流均衡 | 🥇 ¥2999 | 参数摘要 | 来源链接 | 来源链接 |
 ```
 
 Common ranking direction:
@@ -91,6 +104,22 @@ Rules:
 - Clarify coupon, subsidy, presale, third-party, and warranty caveats.
 - Mark Pinduoduo clues as not directly verified unless they come from an accessible purchase page explicitly checked in scope.
 
+## Exclusion Reasons Table
+
+Create an exclusion table for relevant longlist items that did not enter the qualified candidate set:
+
+```markdown
+| 未入选产品/方案 | 来源线索 | 未入选原因 | 重新考虑条件 |
+|---|---|---|---|
+| 产品 X | [发布/价格线索](https://...) | 超预算且无可复现优惠 | 用户加预算或出现明确好价 |
+```
+
+Rules:
+
+- Do not use vague reasons like “综合不如” without stating the concrete failing constraint.
+- Include discontinued, unavailable, evidence-poor, over-budget, wrong-spec, risky-channel, and duplicate/covered alternatives when they were relevant enough to be considered.
+- If the longlist is very large, include the most relevant exclusions and state how many lower-relevance items were omitted from the table.
+
 ## Output Contract
 
 End with:
@@ -99,4 +128,5 @@ End with:
 - Specs table with medals and glossary.
 - Pros/cons table with linked claims.
 - Price table with linked prices, threshold logic, and source platform category distinctions.
+- Exclusion reasons table for relevant non-qualified longlist items.
 - Known data gaps and how they affect confidence.

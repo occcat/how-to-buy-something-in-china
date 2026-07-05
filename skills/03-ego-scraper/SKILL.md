@@ -1,6 +1,6 @@
 ---
 name: 03-ego-scraper
-description: Collect China social-platform, purchase-platform, and price-comparison evidence with Lite Ego or ego-browser while avoiding user disruption. Use for Bilibili, Zhihu, Xiaohongshu, Taobao, JD, Xianyu, Manmanbuy, official specs, comments, prices, and linked source notes. Treat Pinduoduo only as indirect price clues from 社媒平台 or 比价平台.
+description: Build a broad candidate universe and collect China social-platform, purchase-platform, and price-comparison evidence with Lite Ego or ego-browser while avoiding user disruption. Use for industry leader scans, new releases, previous-generation flagships, Bilibili, Zhihu, Xiaohongshu, Taobao, JD, Xianyu, Manmanbuy, official specs, comments, prices, and linked source notes. Treat Pinduoduo only as indirect price clues from 社媒平台 or 比价平台.
 ---
 
 # 03 Ego Scraper
@@ -39,7 +39,15 @@ Pinduoduo is categorized as a 购买平台, but do not perform login-state check
 
 ## Collection Plan
 
-For each Top 5 candidate, collect:
+Before collecting product-level evidence, build a candidate universe:
+
+- Scan industry-leading companies/brands, major product lines, current new releases, previous-generation flagships, and still-competitive older high-end products for the category.
+- Search across 社媒平台, 购买平台, and 比价平台 so candidate discovery is not anchored to one platform or one familiar brand set.
+- Keep a longlist of relevant products/models/solutions with source links and the reason each might match the clarified requirements.
+- Filter the longlist into all candidates that meet the user’s hard constraints. Keep at most 50 qualified candidates; if more than 50 qualify, retain the 50 with the clearest match, strongest source coverage, and most reliable purchase path, then record the truncation rule.
+- Record high-relevance longlist items that do not qualify in an exclusion list with explicit reasons.
+
+For each qualified candidate, collect:
 
 - Official specs: official site, brand store, or trusted spec database.
 - MSRP and current new price: official store, JD, Taobao/Tmall.
@@ -49,13 +57,12 @@ For each Top 5 candidate, collect:
 - Positive experience: review videos/articles and owner comments.
 - Negative experience: comments, complaint posts, 闲鱼 exit reasons, long-term reviews.
 
-Minimum evidence per candidate:
+Minimum evidence per qualified candidate:
 
 - 1 reliable specs source.
 - 1 current price source.
 - 1 historical or threshold price source when available.
-- 2 positive experience links.
-- 2 negative experience links.
+- For final Top 3 recommendation candidates: 2 positive experience links and 2 negative experience links where available.
 
 If evidence cannot be found, mark it as missing rather than filling the gap with assumptions.
 
@@ -64,10 +71,16 @@ If evidence cannot be found, mark it as missing rather than filling the gap with
 Record source notes in a structured scratch format, preferably `.cache/research_notes.jsonl`:
 
 ```json
-{"candidate":"产品 A","platform_category":"社媒平台","site":"bilibili","type":"negative","claim":"游戏发热明显","url":"https://...","quote":"用户原话短摘","checked_at":"2026-07-06T12:00:00+08:00"}
+{"candidate":"产品 A","candidate_status":"qualified","platform_category":"社媒平台","site":"bilibili","type":"negative","claim":"游戏发热明显","url":"https://...","quote":"用户原话短摘","checked_at":"2026-07-06T12:00:00+08:00"}
 ```
 
 Do not quote long copyrighted content. Keep only short claim snippets and links.
+
+Use `candidate_status` values consistently:
+
+- `longlist`: discovered but not yet filtered.
+- `qualified`: meets hard constraints and remains in the candidate set.
+- `excluded`: relevant but not included; include an `exclusion_reason`.
 
 ## Platform Hints
 
@@ -93,7 +106,9 @@ Do not quote long copyrighted content. Keep only short claim snippets and links.
 
 End collection with:
 
-- Top 5 candidate list and why each remains in scope.
+- Industry leader/new release/previous-generation flagship scan summary.
+- Longlist summary, qualified candidate set of up to 50 items, and why each remains in scope.
+- Excluded high-relevance candidates with explicit exclusion reasons.
 - Evidence notes grouped by candidate and platform category.
-- Source links ready for the three final tables, preserving 社媒平台, 购买平台, and 比价平台 distinctions.
+- Source links ready for the final tables, preserving 社媒平台, 购买平台, and 比价平台 distinctions.
 - Any missing platform/data and the reason.

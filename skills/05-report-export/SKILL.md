@@ -1,6 +1,6 @@
 ---
 name: 05-report-export
-description: Write the final China shopping research report and export Markdown plus PDF under report by date, including research background, Lite Ego disclosure, clarified requirements, Top 5 candidates, comparison tables, final Top 3 recommendations, caveats, and source-linked evidence. Use after tables are complete.
+description: Write the final China shopping research report and export Markdown plus PDF under report by date and artifact type, including research background, Lite Ego disclosure, clarified requirements, qualified candidates up to 50 items, comparison tables, exclusion reasons, final Top 3 recommendations, caveats, and source-linked evidence. Use after tables are complete.
 ---
 
 # 05 Report Export
@@ -28,9 +28,12 @@ DATE="$(date +%F)"
 Write files to:
 
 ```text
-report/YYYY-MM-DD/产品名称-调研报告.md
-report/YYYY-MM-DD/产品名称-调研报告.pdf
+report/YYYY-MM-DD/md/产品名称-调研报告.md
+report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf
 ```
+
+Always split artifacts by type under the date directory. Do not place Markdown or PDF files directly under `report/YYYY-MM-DD/`.
+HTML is an intermediate artifact only. Write temporary HTML, CSS, and conversion assets under `.cache/`, not `report/`, and delete them immediately after the PDF exists and has been verified.
 
 Sanitize product names by removing `/`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, newlines, and excessive spaces.
 
@@ -43,7 +46,7 @@ The Markdown report must contain exactly these major sections:
 
 ## 1. 调研背景、工具与需求分析
 
-## 2. 候选收集 (Top 5)
+## 2. 候选收集（最多 50 个符合条件候选）
 
 ## 3. 选型表格
 
@@ -58,13 +61,15 @@ Section 1 must include:
 - Whether secondhand was accepted.
 - Which platforms were checked and any login/sub-agent authorization.
 - Data sources grouped into 社媒平台, 购买平台, and 比价平台, including any blocked or skipped platform category.
+- Industry-leading companies/brands, current new releases, and previous-generation flagships considered during candidate discovery.
+- Candidate-set cap and truncation rule if more than 50 candidates meet the hard constraints.
 - Lite Ego mention and link: https://lite.ego.app.
 
 Section 2 must include:
 
-- Top 5 candidates.
+- Qualified candidate set, up to 50 candidates.
 - Why each candidate is included.
-- Any candidate excluded due to hard constraints.
+- Relevant longlist items excluded due to hard constraints, evidence gaps, channel risk, duplication/coverage, or other concrete reasons.
 
 Section 3 must include:
 
@@ -72,6 +77,7 @@ Section 3 must include:
 - Glossary.
 - Pros/cons table.
 - Price table.
+- Exclusion reasons table.
 
 Section 4 must include:
 
@@ -91,25 +97,30 @@ Section 4 must include:
 
 ## PDF Export
 
-Try available tools in this order:
+PDF export must use an HTML intermediate:
 
-1. Existing project script, if present.
-2. `md-to-pdf`, if installed.
-3. `pandoc`, if installed.
-4. Browser print/export through Lite Ego or another available browser automation path.
+1. Produce the final Markdown report under `report/YYYY-MM-DD/md/`.
+2. Render that Markdown or equivalent report structure into a styled temporary HTML file under `.cache/`.
+3. Convert the temporary HTML to `report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf` using browser print/export, Lite Ego/`ego-browser`, Playwright/Chromium, `wkhtmltopdf`, `weasyprint`, or an existing project script that follows this HTML-to-PDF pipeline.
+4. Disable default headers and footers during conversion. The PDF must not contain tool-added title, URL, date, page number, browser header, or browser footer unless the user explicitly requested them.
+5. After confirming the PDF exists and passes basic visual/layout checks, delete the temporary HTML file and any CSS/assets created only for conversion.
 
-If no PDF path is available, still write Markdown and report the exact blocker. Do not claim PDF was generated unless the file exists.
+Do not generate the final PDF by hand-building pages directly from Markdown when an HTML-to-PDF path is unavailable. If no HTML-to-PDF path is available, still write Markdown and report the exact blocker and install/run command needed. Do not claim PDF was generated unless the file exists.
 
 ## Completion Checklist
 
 Before final response, verify:
 
-- Markdown file exists under `report/YYYY-MM-DD/`.
-- PDF file exists or the blocker is stated.
+- Markdown file exists under `report/YYYY-MM-DD/md/`.
+- PDF file exists under `report/YYYY-MM-DD/pdf/` or the blocker is stated.
+- PDF was generated from a temporary HTML intermediate.
+- PDF has no automatically generated header or footer.
+- Temporary HTML/CSS/conversion assets created only for PDF export have been deleted.
 - `.cache/` and `report/` remain ignored and generated artifacts were not added to Git.
 - The report includes all 4 required sections.
 - Section 1 groups checked sources into 社媒平台, 购买平台, and 比价平台.
 - Tables contain source links for claims and prices.
+- Exclusion reasons table is present when any relevant longlist item was not included.
 - Top 3 recommendations are present.
 - `.cache/` temporary scripts have been deleted.
 - No temporary files were left in the repository root.

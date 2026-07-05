@@ -64,7 +64,7 @@ Never store cookies, tokens, phone numbers, shipping addresses, payment data, or
 
 ## User Prompts
 
-Prefer selectable option UI when available. If not available, use the numbered Markdown prompts below. Always keep the recommended/default option first.
+Use the Plan-mode selectable option UI for prompts. If it is unavailable, stop the buying workflow and ask the user to switch to Plan mode. Always keep the recommended/default option first.
 
 When login is missing:
 

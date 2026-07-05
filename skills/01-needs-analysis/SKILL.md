@@ -12,12 +12,12 @@ Use this skill at the start of every buying task. Do not recommend products unti
 ## Workflow
 
 1. Perform lightweight background search for the category or model.
-   - Identify current market language, popular selling points, known pain points, model variants, rough price range, and common traps.
+   - Identify current market language, popular selling points, known pain points, model variants, rough price range, common traps, industry-leading companies/brands, current new releases, and previous-generation flagships that may still be competitive.
    - Keep this search shallow; the goal is better questions, not final conclusions.
 2. Ask tailored questions.
    - Ask only questions that reduce decision uncertainty.
    - Every question must provide at least 3 concrete default options.
-   - Prefer selectable option UI when the runtime supports it, such as Plan-mode choices. Otherwise use numbered Markdown options.
+   - Use the Plan-mode selectable option UI. If it is unavailable, stop and ask the user to switch to Plan mode before continuing the buying workflow.
    - Put the recommended/default option first and label it as 推荐.
    - Include an open supplement such as “也可以直接补充你的真实情况”.
 3. Identify possible pseudo-needs.
@@ -39,7 +39,9 @@ For a broad category request such as “手机”, ask about:
 - Channel: `只买全新国行` / `接受官方二手或官翻` / `接受闲鱼二手` / `只看低价渠道`.
 - Purchase platform: `京东自营/官方旗舰店` / `淘宝/天猫` / `参考拼多多百亿补贴价格线索` / `不限平台按到手价`.
 
-When no selectable UI is available, format questions like:
+When no selectable UI is available, do not continue the buying workflow. Tell the user to switch to Plan mode and restart the request.
+
+When selectable UI is available, ask questions shaped like:
 
 ```markdown
 预算先按哪档筛选？
@@ -86,7 +88,9 @@ End the stage with a compact profile:
 - 需要登录的平台：
 - 已确认真实需求：
 - 待验证伪需求：
-- Top 5 候选方向：
+- 候选发现方向：
+- 行业头部公司/品牌覆盖重点：
+- 必须纳入长名单的型号/品类：
 ```
 
 If the user refuses to answer, continue with explicit assumptions and mark them as assumptions.
