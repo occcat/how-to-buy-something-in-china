@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ego 采集"
+  short_description: "免打扰采集社媒、电商和价格证据"
+  default_prompt: "Use $03-ego-scraper to collect linked evidence from China ecommerce and social sites."

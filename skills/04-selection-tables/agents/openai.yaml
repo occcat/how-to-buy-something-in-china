@@ -1,0 +1,4 @@
+interface:
+  display_name: "选型表格"
+  short_description: "生成配置、评价和价格横向对比表"
+  default_prompt: "Use $04-selection-tables to turn collected product data into comparison tables."

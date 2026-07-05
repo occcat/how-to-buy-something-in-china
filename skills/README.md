@@ -1,11 +1,22 @@
 # Skills Directory
 
-这是为 `how-to-buy-something-in-china` 准备的 Agent 技能工具箱，对应 `AGENTS.md` 中的 5 个核心阶段。
-作为 Agent，在执行相应阶段的任务时，优先查阅并调用此处的指南和脚本。
+这里存放本项目的本地 Agent Skills。每个阶段都是一个标准 Skill 目录，包含 `SKILL.md` 和可选的 `agents/openai.yaml`、脚本、参考文件。
 
-## 目录说明
+## 阶段目录
 
-- **01-needs-analysis/**: 需求心理学分析与问卷生成。包含如何甄别「伪需求」，以及常见的 3 个合理选项模板。
-- **02-env-check/**: 系统环境、浏览器依赖和登录态检查。包含检查 macOS、`ego lite` 可用性的方法。
-- **03-ego-scraper/**: 社媒抓取、数据收集的隔离操作规范。包含利用 `ego-browser` 抓取不同平台数据的注意事项，如**静音/暂停视频**的注入脚本和**即用即关**的策略。
-- **04-report-generator/**: 最终报告输出相关的辅助技能。包含 Markdown 报告模板结构，以及将 MD 渲染为 PDF 的建议方法。
+- `01-needs-analysis/`：先搜后问，拆解购买需求，识别伪需求，生成调研画像。
+- `02-env-check/`：检查 macOS、Lite Ego、登录态缓存和 Sub Agent 授权。
+- `03-ego-scraper/`：用 Lite Ego 免打扰采集社媒、电商、官网和价格数据。
+- `04-selection-tables/`：把 Top 5 候选整理成配置表、优缺点表和价格表。
+- `05-report-export/`：生成最终 Markdown 报告、Top 3 推荐和 PDF。
+
+## 使用方式
+
+执行购买调研时，先读取根目录 `AGENTS.md`，再按阶段读取对应 `SKILL.md`。不要一次性加载无关阶段的参考文件或脚本。
+
+## 目录约束
+
+- `.cache/` 只放登录态缓存、抓取中间数据和临时脚本，必须被 Git 忽略。
+- `report/` 只放最终 Markdown/PDF 报告，必须被 Git 忽略。
+- 调用浏览器自动化写临时 Node.js 脚本时，只能写入 `.cache/`，结束后删除。
+- 不在根目录遗留临时抓取文件、截图、HTML 或调试脚本。

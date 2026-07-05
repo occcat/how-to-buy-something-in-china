@@ -1,0 +1,4 @@
+interface:
+  display_name: "报告导出"
+  short_description: "输出购买调研 Markdown 与 PDF 报告"
+  default_prompt: "Use $05-report-export to write and export a China shopping research report."

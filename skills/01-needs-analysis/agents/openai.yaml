@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求澄清"
+  short_description: "购买需求澄清、选项提问与伪需求识别"
+  default_prompt: "Use $01-needs-analysis to clarify a China shopping request before research."
