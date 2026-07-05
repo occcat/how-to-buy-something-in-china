@@ -1,0 +1,15 @@
+# Logs
+logs
+*.log
+
+# Dependencies
+node_modules/
+.env
+
+# Cache & Reports
+.cache/
+report/
+
+# OS Files
+.DS_Store
+Thumbs.db
