@@ -34,7 +34,7 @@
 │   │   ├── SKILL.md
 │   │   ├── check_env.sh
 │   │   └── agents/openai.yaml
-│   ├── 03-ego-scraper/                # 阶段 3：Lite Ego 采集与浏览器规则
+│   ├── 03-ego-scraper/                # 阶段 3：ego lite 采集与浏览器规则
 │   │   ├── SKILL.md
 │   │   ├── browser_rules.md
 │   │   └── agents/openai.yaml
@@ -64,7 +64,7 @@
 
 如果当前环境无法提供 Plan 模式那种可选择选项体验，Agent 会在对话中说明并要求切换到 Plan 模式后重新发起购买调研，不会降级为 Markdown 编号选项继续执行。
 
-## 工具策略与致谢：[ego lite Browser](https://lite.ego.app)
+## 工具策略与致谢：[ego lite browser](https://lite.ego.app)
 
 **强制约束**：当 AI Agent 需要到 B 站、闲鱼、小红书、淘宝等社媒平台或购买平台执行搜索、比价或抓取评论时，**默认且必须使用 ego lite 浏览器（`ego-browser` CLI）**。普通网页抓取工具在这些平台会遭遇严重的反爬拦截、SPA 路由或登录墙阻拦。拼多多归入购买平台，但不作为直接网页采集平台，只记录来自社媒平台或比价平台的公开价格线索。
 

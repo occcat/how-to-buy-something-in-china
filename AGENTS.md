@@ -6,7 +6,7 @@
 
 - 先澄清，再调研。任何购买任务都必须先做一轮背景搜索和需求提问，不能直接给推荐。
 - Plan 模式是硬性前置条件。任何购买调研任务必须在支持 Plan 模式可选项 UI 的环境中执行；如果当前环境不支持，必须在阶段 1 的第一步立即告知用户切换到 Plan 模式并退出，不得继续搜索、提问或推荐。
-- 先保护用户体验，再采集数据。使用 `ego-browser`/Lite Ego 时必须隔离操作、静音视频、用完关闭 Tab。
+- 先保护用户体验，再采集数据。使用 `ego-browser`/ego lite 时必须隔离操作、静音视频、用完关闭 Tab。
 - 先给证据，再给结论。参数、评价和价格都必须附来源链接；无法验证的信息标注为未确认，不得编造。
 - 先扩大候选，再收敛推荐。任何品类都必须先建立候选长名单，再筛出所有符合条件的候选，符合条件候选最多保留 50 个；不得跳过长名单直接给固定数量推荐。
 - 先确认高成本动作，再执行。需要扫码登录、二手平台、Sub Agent 并行或长时间抓取时，先征得用户同意。
@@ -46,7 +46,7 @@
 按阶段读取并使用 `skills/` 下的本地 Skill：
 
 1. `skills/01-needs-analysis/SKILL.md`：需求澄清、伪需求识别、最多 3 轮问答。
-2. `skills/02-env-check/SKILL.md`：macOS、Lite Ego、登录态缓存和 Sub Agent 授权检查。
+2. `skills/02-env-check/SKILL.md`：macOS、ego lite、登录态缓存和 Sub Agent 授权检查。
 3. `skills/03-ego-scraper/SKILL.md`：免打扰网页访问、社媒平台、购买平台、比价平台数据采集和来源记录。
 4. `skills/04-selection-tables/SKILL.md`：候选集、配置表、优缺点表、价格表、未入选原因表。
 5. `skills/05-report-export/SKILL.md`：最终 Top 3、Markdown 报告和 PDF 导出。
@@ -81,8 +81,8 @@
 必须执行：
 
 1. 运行 `skills/02-env-check/check_env.sh`。
-2. 如果 `uname -s` 不是 `Darwin`，告知用户 Lite Ego 当前仅支持 macOS，并结束调研流程。
-3. 如果缺少 Lite Ego/`ego-browser`，指引用户安装：https://lite.ego.app。
+2. 如果 `uname -s` 不是 `Darwin`，告知用户 ego lite 当前仅支持 macOS，并结束调研流程。
+3. 如果缺少 ego lite/`ego-browser`，指引用户安装：https://lite.ego.app。
 4. 根据本次调研需要访问的社媒平台、购买平台和比价平台检查登录态，并缓存到 `.cache/login_status.json`。
 5. 如果用户接受二手，必须检查闲鱼登录态；如果需要淘宝/天猫/京东等购买平台详情页，或小红书/知乎/Bilibili 等社媒平台详情页，也要检查对应登录态。拼多多不做登录态检查，仅作为社媒平台和比价平台中的价格线索参考。
 6. 缺少登录态时，询问用户是否愿意手动扫码登录。
@@ -118,7 +118,7 @@
 
 浏览器红线：
 
-- 需要登录、SPA 或强反爬页面时，使用 `ego-browser`/Lite Ego。
+- 需要登录、SPA 或强反爬页面时，使用 `ego-browser`/ego lite。
 - 打开 Bilibili 等视频网站后，立即注入静音和暂停脚本。
 - 每个 Tab 提取完信息后立即关闭。
 - 临时 Node.js/浏览器自动化脚本只能放在 `.cache/`，任务结束立刻删除。
@@ -175,7 +175,7 @@
 
 第 1 章必须包含：
 
-- Lite Ego/`ego-browser` 使用说明和官网链接：https://lite.ego.app。
+- ego lite/`ego-browser` 使用说明和官网链接：https://lite.ego.app。
 - 用户原始需求。
 - 沟通拆解后的真实需求。
 - 调研范围、社媒平台、购买平台、比价平台数据来源、登录态/二手/并行搜索授权情况。

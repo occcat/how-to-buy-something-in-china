@@ -1,6 +1,6 @@
 ---
 name: 02-env-check
-description: Check prerequisites for China shopping research including macOS support, Lite Ego or ego-browser availability, safe login-state caching, required platform login checks for social-platform, purchase-platform, and price-comparison sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
+description: Check prerequisites for China shopping research including macOS support, ego lite or ego-browser availability, safe login-state caching, required platform login checks for social-platform, purchase-platform, and price-comparison sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
 ---
 
 # 02 Env Check
@@ -12,8 +12,8 @@ Use this skill after requirements are clarified and before collecting data from 
 ## Required Checks
 
 1. Run `skills/02-env-check/check_env.sh` from the repository root.
-2. If the OS is not macOS, stop and tell the user Lite Ego currently supports macOS only.
-3. If Lite Ego or `ego-browser` is missing, direct the user to install it from https://lite.ego.app.
+2. If the OS is not macOS, stop and tell the user ego lite currently supports macOS only.
+3. If ego lite or `ego-browser` is missing, direct the user to install it from https://lite.ego.app.
 4. Create `.cache/` if it does not exist.
 5. Check platform login state only for sites required by the current research.
 6. Cache login state in `.cache/login_status.json`.
@@ -89,7 +89,7 @@ When asking about Sub Agents:
 End the stage with:
 
 - OS result.
-- Lite Ego/`ego-browser` result.
+- ego lite/`ego-browser` result.
 - Required sites and login status.
 - Whether secondhand research is enabled.
 - Whether Sub Agent parallel search is authorized.

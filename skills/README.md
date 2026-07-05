@@ -5,8 +5,8 @@
 ## 阶段目录
 
 - `01-needs-analysis/`：先搜后问，拆解购买需求，识别伪需求，生成调研画像。
-- `02-env-check/`：检查 macOS、Lite Ego、登录态缓存和 Sub Agent 授权。
-- `03-ego-scraper/`：用 Lite Ego 免打扰扫描行业头部公司、新品、前几代旗舰，并采集社媒平台、购买平台、比价平台数据。
+- `02-env-check/`：检查 macOS、ego lite、登录态缓存和 Sub Agent 授权。
+- `03-ego-scraper/`：用 ego lite 免打扰扫描行业头部公司、新品、前几代旗舰，并采集社媒平台、购买平台、比价平台数据。
 - `04-selection-tables/`：把最多 50 个符合条件候选整理成配置表、优缺点表、价格表和未入选原因表。
 - `05-report-export/`：生成最终 Markdown 报告、Top 3 推荐和 PDF；PDF 必须先经由临时 HTML 中间格式生成。
 

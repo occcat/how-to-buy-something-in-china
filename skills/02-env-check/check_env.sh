@@ -1,24 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# 检查当前环境是否满足前置要求：macOS、Lite Ego/ego-browser、.cache。
+# 检查当前环境是否满足前置要求：macOS、ego lite/ego-browser、.cache。
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CACHE_DIR="$ROOT_DIR/.cache"
 LOGIN_CACHE="$CACHE_DIR/login_status.json"
 
+find_ego_lite_app() {
+    find "/Applications" "$HOME/Applications" -maxdepth 1 -type d -iname "ego lite.app" -print -quit 2>/dev/null
+}
+
 if [[ "$(uname -s)" != "Darwin" ]]; then
-    echo "错误：本项目依赖的 Lite Ego/ego-browser 目前仅支持 macOS。当前系统不是 macOS，无法继续。"
+    echo "错误：本项目依赖的 ego lite/ego-browser 目前仅支持 macOS。当前系统不是 macOS，无法继续。"
     exit 1
 fi
 echo "操作系统检测通过：macOS"
 
 if command -v ego-browser >/dev/null 2>&1; then
     echo "ego-browser CLI 检测通过：$(command -v ego-browser)"
-elif [[ -d "/Applications/ego lite.app" || -d "/Applications/Ego Lite.app" || -d "$HOME/Applications/ego lite.app" || -d "$HOME/Applications/Ego Lite.app" ]]; then
-    echo "Lite Ego App 检测通过，但未发现 ego-browser CLI。后续自动化可能需要确认 CLI 是否可用。"
+elif [[ -n "$(find_ego_lite_app)" ]]; then
+    echo "ego lite app 检测通过，但未发现 ego-browser CLI。后续自动化可能需要确认 CLI 是否可用。"
 else
-    echo "错误：未检测到 Lite Ego/ego-browser。请先安装：https://lite.ego.app"
+    echo "错误：未检测到 ego lite/ego-browser。请先安装：https://lite.ego.app"
     exit 1
 fi
 

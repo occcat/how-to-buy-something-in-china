@@ -1,6 +1,6 @@
 # Ego Browser 安全使用守则
 
-为了做到 “Think of the user”，Agent 驱动 Lite Ego/`ego-browser` 搜索时必须遵守这些红线。
+为了做到 “Think of the user”，Agent 驱动 ego lite/`ego-browser` 搜索时必须遵守这些红线。
 
 ## 视频页
 

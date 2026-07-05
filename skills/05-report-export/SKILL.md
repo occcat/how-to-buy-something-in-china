@@ -1,6 +1,6 @@
 ---
 name: 05-report-export
-description: Write the final China shopping research report and export Markdown plus PDF under report by date and artifact type, including research background, Lite Ego disclosure, clarified requirements, qualified candidates up to 50 items, comparison tables, exclusion reasons, final Top 3 recommendations, caveats, and source-linked evidence. Use after tables are complete.
+description: Write the final China shopping research report and export Markdown plus PDF under report by date and artifact type, including research background, ego lite disclosure, clarified requirements, qualified candidates up to 50 items, comparison tables, exclusion reasons, final Top 3 recommendations, caveats, and source-linked evidence. Use after tables are complete.
 ---
 
 # 05 Report Export
@@ -63,7 +63,7 @@ Section 1 must include:
 - Data sources grouped into 社媒平台, 购买平台, and 比价平台, including any blocked or skipped platform category.
 - Industry-leading companies/brands, current new releases, and previous-generation flagships considered during candidate discovery.
 - Candidate-set cap and truncation rule if more than 50 candidates meet the hard constraints.
-- Lite Ego mention and link: https://lite.ego.app.
+- ego lite mention and link: https://lite.ego.app.
 
 Section 2 must include:
 
@@ -101,7 +101,7 @@ PDF export must use an HTML intermediate:
 
 1. Produce the final Markdown report under `report/YYYY-MM-DD/md/`.
 2. Render that Markdown or equivalent report structure into a styled temporary HTML file under `.cache/`.
-3. Convert the temporary HTML to `report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf` using browser print/export, Lite Ego/`ego-browser`, Playwright/Chromium, `wkhtmltopdf`, `weasyprint`, or an existing project script that follows this HTML-to-PDF pipeline.
+3. Convert the temporary HTML to `report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf` using browser print/export, ego lite/`ego-browser`, Playwright/Chromium, `wkhtmltopdf`, `weasyprint`, or an existing project script that follows this HTML-to-PDF pipeline.
 4. Disable default headers and footers during conversion. The PDF must not contain tool-added title, URL, date, page number, browser header, or browser footer unless the user explicitly requested them.
 5. After confirming the PDF exists and passes basic visual/layout checks, delete the temporary HTML file and any CSS/assets created only for conversion.
 
