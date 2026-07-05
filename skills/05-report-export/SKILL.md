@@ -9,6 +9,14 @@ description: Write the final China shopping research report and export Markdown 
 
 Use this skill at the end of the buying workflow to produce durable report files.
 
+## Git Hygiene
+
+- Write all report-generation intermediates and final artifacts only under ignored paths such as `.cache/` and `report/`.
+- Keep `.cache/` and `report/` ignored. Do not remove ignore rules to commit generated reports.
+- Do not modify tracked repository files during ordinary report generation unless the user explicitly asks for SOP, skill, script, or documentation changes.
+- Do not use `git add -f` for `.cache/`, `report/`, screenshots, HTML dumps, logs, temporary scripts, Markdown reports, or PDFs unless the user explicitly asks to version them.
+- Create temporary Node.js or browser automation scripts only under `.cache/`, and delete them immediately after use.
+
 ## Report Path
 
 Use the current local date:
@@ -97,8 +105,10 @@ Before final response, verify:
 
 - Markdown file exists under `report/YYYY-MM-DD/`.
 - PDF file exists or the blocker is stated.
+- `.cache/` and `report/` remain ignored and generated artifacts were not added to Git.
 - The report includes all 4 required sections.
 - Tables contain source links for claims and prices.
 - Top 3 recommendations are present.
 - `.cache/` temporary scripts have been deleted.
 - No temporary files were left in the repository root.
+- `git status --short` does not show report artifacts, caches, screenshots, HTML dumps, logs, or temporary scripts.
