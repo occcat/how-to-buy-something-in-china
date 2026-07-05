@@ -1,6 +1,6 @@
 ---
 name: 03-ego-scraper
-description: Collect China ecommerce and social evidence with Lite Ego or ego-browser while avoiding user disruption. Use for Bilibili, Zhihu, Xiaohongshu, Taobao, JD, Xianyu, Manmanbuy, official specs, comments, prices, and linked source notes.
+description: Collect China ecommerce and social evidence with Lite Ego or ego-browser while avoiding user disruption. Use for Bilibili, Zhihu, Xiaohongshu, Taobao, JD, Xianyu, Manmanbuy, official specs, comments, prices, and linked source notes. Treat Pinduoduo only as indirect price clues from social/review/price-comparison sources.
 ---
 
 # 03 Ego Scraper
@@ -33,6 +33,7 @@ For each Top 5 candidate, collect:
 
 - Official specs: official site, brand store, or trusted spec database.
 - MSRP and current new price: official store, JD, Taobao/Tmall.
+- Pinduoduo price clues: only from social posts, reviews, or price-comparison platforms; mark as not directly verified.
 - Historical low: 慢慢买 or other price history page.
 - Secondhand range: 闲鱼 only when user accepts secondhand or resale value matters.
 - Positive experience: review videos/articles and owner comments.
@@ -66,6 +67,7 @@ Do not quote long copyrighted content. Keep only short claim snippets and links.
 - 闲鱼: seller “出坑/换机/暗病” language is useful negative evidence, but treat as anecdotal.
 - 慢慢买: use for history and threshold bands, not as the only live price.
 - 京东/淘宝: distinguish official/self-operated, third-party, coupons, presale, and after-subsidy price.
+- 拼多多: do not perform login-state checks or direct web collection; record only public subsidy/price clues mentioned by social, review, or price-comparison sources, and mark them as not directly verified.
 - 官网: use for specs and MSRP, not as the best buying price by default.
 
 ## Output Contract

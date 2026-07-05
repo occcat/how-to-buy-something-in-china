@@ -1,6 +1,6 @@
 ---
 name: 02-env-check
-description: Check prerequisites for China shopping research including macOS support, Lite Ego or ego-browser availability, safe login-state caching, required platform login checks, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
+description: Check prerequisites for China shopping research including macOS support, Lite Ego or ego-browser availability, safe login-state caching, required platform login checks for ecommerce/social sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
 ---
 
 # 02 Env Check
@@ -28,6 +28,7 @@ Use the clarified requirements to decide required login checks:
 - 知乎: long-form owner experience and complaints.
 - 小红书: lifestyle usage, planted/anti-planted notes.
 - 京东/淘宝/天猫: live new-item prices and reviews.
+- 拼多多: do not check login state; use only public price clues from social posts, reviews, or price-comparison platforms.
 - 慢慢买: historical low and price trend.
 - 闲鱼: secondhand price, seller exit reasons, resale risk.
 - 官网/品牌商城: official specs, MSRP, warranty language.

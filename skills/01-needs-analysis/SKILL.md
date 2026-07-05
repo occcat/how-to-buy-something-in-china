@@ -37,6 +37,7 @@ For a broad category request such as “手机”, ask about:
 - Preference: `安卓` / `iPhone` / `无品牌偏好` / `只考虑某几个品牌`.
 - Hard no: `发热` / `系统广告` / `重` / `拍照差` / `售后弱` / `二手风险`.
 - Channel: `只买全新国行` / `接受官方二手或官翻` / `接受闲鱼二手` / `只看低价渠道`.
+- Ecommerce platform: `京东自营/官方旗舰店` / `淘宝/天猫` / `参考拼多多百亿补贴价格线索` / `不限平台按到手价`.
 
 When no selectable UI is available, format questions like:
 
