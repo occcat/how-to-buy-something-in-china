@@ -1,9 +1,9 @@
 ---
-name: 03-ego-scraper
+name: ego-scraper
 description: Build a broad candidate universe and collect China social-platform, purchase-platform, and price-comparison evidence with ego lite or ego-browser while avoiding user disruption. Use for industry leader scans, new releases, previous-generation flagships, Bilibili, Zhihu, Xiaohongshu, Taobao, JD, Xianyu, Manmanbuy, official specs, comments, prices, and linked source notes. Treat Pinduoduo only as indirect price clues from 社媒平台 or 比价平台.
 ---
 
-# 03 Ego Scraper
+# Ego Scraper
 
 ## Purpose
 

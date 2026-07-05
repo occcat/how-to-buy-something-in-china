@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ego 采集"
-  short_description: "扫描候选宇宙并免打扰采集三类证据"
-  default_prompt: "Use $03-ego-scraper to build a candidate universe and collect linked evidence from China social, purchase, and price-comparison sites."

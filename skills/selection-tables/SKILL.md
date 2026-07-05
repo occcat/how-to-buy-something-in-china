@@ -1,9 +1,9 @@
 ---
-name: 04-selection-tables
+name: selection-tables
 description: Build structured candidate comparison tables for China buying reports, including all qualified candidates up to 50 items, ranked specs with medals, linked pros and cons from real user evidence, linked price bands, exclusion reasons, glossary explanations, and defensible thresholds. Use after evidence collection.
 ---
 
-# 04 Selection Tables
+# Selection Tables
 
 ## Purpose
 

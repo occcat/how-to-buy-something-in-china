@@ -72,7 +72,7 @@
 
 必须执行：
 
-1. 运行 `skills/02-env-check/check_env.sh`。
+1. 运行 `skills/env-check/check_env.sh`。
 2. 如果 `uname -s` 不是 `Darwin`，告知用户 ego lite 当前仅支持 macOS，并结束调研流程。
 3. 如果缺少 ego lite/`ego-browser`，指引用户安装：https://lite.ego.app。
 4. 根据本次调研需要访问的社媒平台、购买平台和比价平台检查登录态，并缓存到 `.cache/login_status.json`。

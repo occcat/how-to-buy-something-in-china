@@ -1,9 +1,9 @@
 ---
-name: 05-report-export
+name: report-export
 description: Write the final China shopping research report and export Markdown plus PDF under report by date and artifact type, including research background, ego lite disclosure, clarified requirements, qualified candidates up to 50 items, comparison tables, exclusion reasons, final Top 3 recommendations, caveats, and source-linked evidence. Use after tables are complete.
 ---
 
-# 05 Report Export
+# Report Export
 
 ## Purpose
 

@@ -1,4 +1,4 @@
 interface:
   display_name: "选型表格"
   short_description: "生成候选集、配置、评价、价格和未入选表"
-  default_prompt: "Use $04-selection-tables to turn collected candidate data into comparison and exclusion-reason tables."
+  default_prompt: "Use $selection-tables to turn collected candidate data into comparison and exclusion-reason tables."

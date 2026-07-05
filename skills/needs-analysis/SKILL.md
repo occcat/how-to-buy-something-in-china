@@ -1,9 +1,9 @@
 ---
-name: 01-needs-analysis
+name: needs-analysis
 description: Clarify China shopping requests before research by doing lightweight background search, asking option-based questions, identifying pseudo-needs, and producing a structured requirement profile. Use when a user provides a product category or model such as 手机 or 一加 15T and expects buying advice.
 ---
 
-# 01 Needs Analysis
+# Needs Analysis
 
 ## Purpose
 

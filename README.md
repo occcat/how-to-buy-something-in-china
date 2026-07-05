@@ -27,21 +27,21 @@
 ├── README.md                          # 你正在看的这份
 ├── skills/                            # 各阶段可复用的 Agent Skills
 │   ├── README.md                      # Skills 目录说明
-│   ├── 01-needs-analysis/             # 阶段 1：需求澄清与伪需求识别
+│   ├── needs-analysis/                # 阶段 1：需求澄清与伪需求识别
 │   │   ├── SKILL.md
 │   │   └── agents/openai.yaml
-│   ├── 02-env-check/                  # 阶段 2：环境、登录态和并行授权检查
+│   ├── env-check/                     # 阶段 2：环境、登录态和并行授权检查
 │   │   ├── SKILL.md
 │   │   ├── check_env.sh
 │   │   └── agents/openai.yaml
-│   ├── 03-ego-scraper/                # 阶段 3：ego lite 采集与浏览器规则
+│   ├── ego-scraper/                   # 阶段 3：ego lite 采集与浏览器规则
 │   │   ├── SKILL.md
 │   │   ├── browser_rules.md
 │   │   └── agents/openai.yaml
-│   ├── 04-selection-tables/           # 阶段 4：候选集和选型表格
+│   ├── selection-tables/              # 阶段 4：候选集和选型表格
 │   │   ├── SKILL.md
 │   │   └── agents/openai.yaml
-│   └── 05-report-export/              # 阶段 5：Markdown/PDF 报告导出
+│   └── report-export/                 # 阶段 5：Markdown/PDF 报告导出
 │       ├── SKILL.md
 │       └── agents/openai.yaml
 ├── .cache/                            # 运行时缓存和临时脚本，Git 忽略
