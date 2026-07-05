@@ -57,6 +57,7 @@ Section 1 must include:
 - Hard constraints and unacceptable tradeoffs.
 - Whether secondhand was accepted.
 - Which platforms were checked and any login/sub-agent authorization.
+- Data sources grouped into 社媒平台, 购买平台, and 比价平台, including any blocked or skipped platform category.
 - Lite Ego mention and link: https://lite.ego.app.
 
 Section 2 must include:
@@ -107,6 +108,7 @@ Before final response, verify:
 - PDF file exists or the blocker is stated.
 - `.cache/` and `report/` remain ignored and generated artifacts were not added to Git.
 - The report includes all 4 required sections.
+- Section 1 groups checked sources into 社媒平台, 购买平台, and 比价平台.
 - Tables contain source links for claims and prices.
 - Top 3 recommendations are present.
 - `.cache/` temporary scripts have been deleted.

@@ -6,7 +6,7 @@
 
 - `01-needs-analysis/`：先搜后问，拆解购买需求，识别伪需求，生成调研画像。
 - `02-env-check/`：检查 macOS、Lite Ego、登录态缓存和 Sub Agent 授权。
-- `03-ego-scraper/`：用 Lite Ego 免打扰采集社媒、电商、官网和价格数据。
+- `03-ego-scraper/`：用 Lite Ego 免打扰采集社媒平台、购买平台、比价平台数据。
 - `04-selection-tables/`：把 Top 5 候选整理成配置表、优缺点表和价格表。
 - `05-report-export/`：生成最终 Markdown 报告、Top 3 推荐和 PDF。
 

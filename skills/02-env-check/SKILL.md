@@ -1,13 +1,13 @@
 ---
 name: 02-env-check
-description: Check prerequisites for China shopping research including macOS support, Lite Ego or ego-browser availability, safe login-state caching, required platform login checks for ecommerce/social sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
+description: Check prerequisites for China shopping research including macOS support, Lite Ego or ego-browser availability, safe login-state caching, required platform login checks for social-platform, purchase-platform, and price-comparison sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
 ---
 
 # 02 Env Check
 
 ## Purpose
 
-Use this skill after requirements are clarified and before collecting data from Chinese ecommerce or social platforms.
+Use this skill after requirements are clarified and before collecting data from Chinese social, purchase, or price-comparison platforms.
 
 ## Required Checks
 
@@ -18,20 +18,21 @@ Use this skill after requirements are clarified and before collecting data from 
 5. Check platform login state only for sites required by the current research.
 6. Cache login state in `.cache/login_status.json`.
 7. Ask for manual扫码登录 only when the needed login state is missing.
-8. Ask whether Sub Agent parallel search is allowed and disclose higher Token cost.
+8. Ask whether Sub Agent parallel search is allowed and disclose higher Token cost. This prompt has exactly two options: `不并行（推荐）` and `并行`.
 
 ## Platform Selection
 
-Use the clarified requirements to decide required login checks:
+Use the clarified requirements to decide required login checks. Classify every target site into one of these three platform types:
 
-- Bilibili: product reviews, comments, video evidence.
-- 知乎: long-form owner experience and complaints.
-- 小红书: lifestyle usage, planted/anti-planted notes.
-- 京东/淘宝/天猫: live new-item prices and reviews.
-- 拼多多: do not check login state; use only public price clues from social posts, reviews, or price-comparison platforms.
-- 慢慢买: historical low and price trend.
-- 闲鱼: secondhand price, seller exit reasons, resale risk.
-- 官网/品牌商城: official specs, MSRP, warranty language.
+- 社媒平台: Bilibili, 知乎, 小红书, forums/communities, media reviews, and comment areas; use for product reviews, owner experience, complaints, video evidence, and reputation.
+- 购买平台: 京东, 淘宝/天猫, 拼多多, 闲鱼, 官网/品牌商城; use for live prices, inventory, versions, official specs, warranty, after-sales terms, and purchase links.
+- 比价平台: 什么值得买, 慢慢买; use for historical lows, price trends, price thresholds, and public subsidy clues.
+
+Site-specific rules:
+
+- 拼多多: do not check login state or collect pages directly; use only public price clues from 社媒平台 or 比价平台.
+- 闲鱼: check login state only when secondhand is accepted or resale value is a decision factor.
+- 官网/品牌商城: usually does not need login; use for official specs, MSRP, warranty language, and official purchase references.
 
 If the user does not accept secondhand, do not require 闲鱼 login unless resale value is a decision factor.
 
@@ -81,7 +82,6 @@ When asking about Sub Agents:
 是否允许启动 Sub Agent 并行搜索来加速信息收集？
 1. 不允许（推荐）：我串行搜索，速度慢一些但更省 Token
 2. 允许：更快，但 Token 消耗会明显增加
-3. 仅在价格/评价信息不足时再询问我
 ```
 
 ## Output Contract
