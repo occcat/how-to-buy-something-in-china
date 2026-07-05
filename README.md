@@ -21,10 +21,31 @@
 
 ```
 .
-├── AGENTS.md        # 给 AI Agent 的工作说明
-├── README.md        # 你正在看的这份
-├── examples/        # 真实调研的指南示例报告
-└── skills/          # 各阶段可复用的 Agent Skills
+├── .gitignore                         # 忽略缓存、报告产物和本地环境文件
+├── AGENTS.md                          # 给 AI Agent 的工作说明与执行 SOP
+├── CLAUDE.md                          # Claude/Codex 类 Agent 入口提示
+├── README.md                          # 你正在看的这份
+├── skills/                            # 各阶段可复用的 Agent Skills
+│   ├── README.md                      # Skills 目录说明
+│   ├── 01-needs-analysis/             # 阶段 1：需求澄清与伪需求识别
+│   │   ├── SKILL.md
+│   │   └── agents/openai.yaml
+│   ├── 02-env-check/                  # 阶段 2：环境、登录态和并行授权检查
+│   │   ├── SKILL.md
+│   │   ├── check_env.sh
+│   │   └── agents/openai.yaml
+│   ├── 03-ego-scraper/                # 阶段 3：Lite Ego 采集与浏览器规则
+│   │   ├── SKILL.md
+│   │   ├── browser_rules.md
+│   │   └── agents/openai.yaml
+│   ├── 04-selection-tables/           # 阶段 4：Top 5 候选和选型表格
+│   │   ├── SKILL.md
+│   │   └── agents/openai.yaml
+│   └── 05-report-export/              # 阶段 5：Markdown/PDF 报告导出
+│       ├── SKILL.md
+│       └── agents/openai.yaml
+├── .cache/                            # 运行时缓存和临时脚本，Git 忽略
+└── report/                            # 最终调研报告输出目录，Git 忽略
 ```
 
 ## 适用场景
