@@ -81,23 +81,21 @@ ego lite 安装方式：
 
 ### 复制给 Agent 的启动提示词
 
-把下面 Markdown 代码块整体复制给你的 Agent 即可。默认使用 GitHub 仓库作为 SOP 来源，由你的 Agent 自行决定如何在临时目录中克隆仓库、读取 `AGENTS.md`，并先开启 Plan 模式向你询问本次购买需求。
+把下面 Markdown 代码块整体复制给你的 Agent 即可。默认使用 GitHub 仓库作为 SOP 来源，并把仓库固定放在当前用户的系统临时目录下：已有就更新，不存在就只浅克隆最新一层；这个克隆目录就是本次调研的临时工作区，避免污染当前项目。
 
 ```markdown
-请用 GitHub 上的购买调研 SOP 帮我做一次完整选购分析。
+请用 GitHub 上的购买调研 SOP 帮我做一次完整选购分析：https://github.com/occcat/how-to-buy-something-in-china
 
-SOP 仓库：https://github.com/occcat/how-to-buy-something-in-china
+先在当前用户的系统临时目录准备 SOP 仓库，不要污染我当前项目。用 `TMP_ROOT="${TMPDIR:-/tmp}"` 和 `SOP_DIR="${TMP_ROOT%/}/.how-to-buy-something-in-china"` 确定路径；如果 `$SOP_DIR` 已是 Git clone，就执行 `git -C "$SOP_DIR" pull --ff-only`，如果不存在，就执行 `git clone --depth 1 https://github.com/occcat/how-to-buy-something-in-china "$SOP_DIR"` 只抓最新一层历史。如果该路径存在但不是 Git clone，请停下说明冲突，不要覆盖。
 
-请你自行决策并执行：
+然后按下面要求执行：
 
-1. 直接开启 Plan 模式，或切换到支持 Plan 模式可选项 UI 的工作方式。
-2. 在临时目录中克隆或读取上面的 GitHub 仓库，不要污染我当前项目。
-3. 先阅读仓库里的 `README.md` 和 `AGENTS.md`，并按 `AGENTS.md` 的阶段流程与 `skills/` 目录执行。
-4. 在继续任何购买调研前检查运行依赖：当前仅支持 macOS，且必须安装并能调用 ego lite/`ego-browser`。如果不是 macOS，或缺少 ego lite/`ego-browser`，请直接说明原因，给出安装链接 https://lite.ego.app，然后退出，不要继续搜索、提问或推荐。
-5. 在 Plan 模式中先问我“这次想买什么”，再用可选择选项继续澄清预算、场景、雷点、二手接受度、登录授权和并行搜索授权。
-6. 如果你当前无法提供 Plan 模式可选项 UI，请直接告诉我切换到支持 Plan 模式的环境，不要继续调研。
-7. 完成需求澄清、环境检查、候选长名单、证据采集、四张选型表格和最终 Top 3 推荐。
-8. 把 Markdown 和 PDF 报告输出到临时工作区的 `report/YYYY-MM-DD/md/` 与 `report/YYYY-MM-DD/pdf/`。
+1. 必须使用支持 Plan 模式可选项 UI 的工作方式；如果无法提供，请直接告诉我切换环境并退出，不要继续调研。
+2. 阅读临时仓库里的 `README.md` 和 `AGENTS.md`，再按 `AGENTS.md` 的阶段流程与 `skills/` 目录执行。
+3. 继续前检查运行依赖：仅支持 macOS，且必须安装并能调用 ego lite/`ego-browser`；不满足时说明原因、给出 https://lite.ego.app 并退出。
+4. 在 Plan 模式中先问我“这次想买什么”，再用可选择选项澄清预算、场景、雷点、二手接受度、登录授权和并行搜索授权。
+5. 完成需求澄清、环境检查、候选长名单、证据采集、四张选型表格和最终 Top 3 推荐。
+6. 报告输出位置分两种情况：如果本次是按上文 clone/pull 得到 `$SOP_DIR`，则 `$SOP_DIR` 就是临时工作区，把 Markdown/PDF 输出到 `$SOP_DIR/report/YYYY-MM-DD/md/` 与 `$SOP_DIR/report/YYYY-MM-DD/pdf/`；如果你已经在本地已有项目里执行，则输出到该项目根目录的 `report/YYYY-MM-DD/md/` 与 `report/YYYY-MM-DD/pdf/`。最终回复给出 PDF 完整路径和 Top 3 理由表格。
 ```
 
 如果你的 Agent 无法访问 GitHub，可以把本仓库手动下载到本地临时目录后，再把本地路径补充给它。无论使用哪种 Agent 客户端，都必须提供 Plan 模式的可选项 UI；否则 Agent 会按仓库 SOP 在阶段 1 直接退出。
