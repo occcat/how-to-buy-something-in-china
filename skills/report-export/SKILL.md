@@ -34,6 +34,7 @@ report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf
 
 Always split artifacts by type under the date directory. Do not place Markdown or PDF files directly under `report/YYYY-MM-DD/`.
 HTML is an intermediate artifact only. Write temporary HTML, CSS, and conversion assets under `.cache/`, not `report/`, and delete them immediately after the PDF exists and has been verified.
+The final chat response must include the full absolute PDF path, for example `/Users/.../report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf`. If PDF export is blocked, explicitly state that no PDF path exists and include the blocker plus the next executable command.
 
 Sanitize product names by removing `/`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, newlines, and excessive spaces.
 
@@ -94,6 +95,7 @@ Section 4 must include:
 - If no candidate satisfies hard constraints, recommend not buying now.
 - Keep price advice tied to the price table thresholds.
 - Call out evidence gaps that lower confidence.
+- The final chat response must include a Top 3 options-and-reasons table with at least: rank, recommendation, core reason, who it fits, who should avoid it, suggested price, and pitfalls.
 
 ## PDF Export
 
@@ -122,6 +124,8 @@ Before final response, verify:
 - Tables contain source links for claims and prices.
 - Exclusion reasons table is present when any relevant longlist item was not included.
 - Top 3 recommendations are present.
+- Final response includes the full absolute PDF path, or clearly states that PDF export was blocked.
+- Final response includes a Top 3 options-and-reasons table.
 - `.cache/` temporary scripts have been deleted.
 - No temporary files were left in the repository root.
 - `git status --short` does not show report artifacts, caches, screenshots, HTML dumps, logs, or temporary scripts.
