@@ -11,14 +11,31 @@ Use this skill after requirements are clarified and before collecting data from 
 
 ## Required Checks
 
-1. Run `skills/env-check/check_env.sh` from the repository root.
+1. Run `skills/env-check/check_env.sh "<task_name>"` from the repository root, or set `SHOPPING_TASK_CACHE_DIR` to the task directory created in stage 1.
 2. If the OS is not macOS, stop and tell the user ego lite currently supports macOS only.
 3. If ego lite or `ego-browser` is missing, direct the user to install it from https://lite.ego.app.
-4. Create `.cache/` if it does not exist.
+4. Create or reuse the current task cache directory `.cache/<task_name>_<uuid>/`; do not write task files directly under `.cache/`.
 5. Check platform login state only for sites required by the current research.
-6. Cache login state in `.cache/login_status.json`.
+6. Cache login state in `.cache/<task_name>_<uuid>/login_status.json`.
 7. Ask for manual扫码登录 only when the needed login state is missing.
 8. Ask whether Sub Agent parallel search is allowed and disclose higher Token cost. This prompt has exactly two options: `不并行（推荐）` and `并行`.
+
+## Task Cache Directory
+
+Every buying task must have one dedicated cache directory:
+
+```text
+.cache/<task_name>_<uuid>/
+```
+
+Rules:
+
+- `task_name` comes from the user request, product name, or category, sanitized for safe paths.
+- `uuid` must be generated with `uuidgen` or an equivalent UUID generator.
+- Use `SHOPPING_TASK_CACHE_DIR` when stage 1 already created the task directory.
+- Otherwise pass the task name as the first argument, for example `skills/env-check/check_env.sh "扫地机器人"`.
+- Store task progress, login status, scrape notes, screenshots, logs, temporary browser scripts, and PDF conversion intermediates inside this directory.
+- Do not write `.cache/login_status.json` or other root-level per-task files.
 
 ## Platform Selection
 
@@ -38,7 +55,7 @@ If the user does not accept secondhand, do not require 闲鱼 login unless resal
 
 ## Login Cache Schema
 
-Store only non-sensitive state:
+Store only non-sensitive state at `.cache/<task_name>_<uuid>/login_status.json`:
 
 ```json
 {
@@ -90,6 +107,8 @@ End the stage with:
 
 - OS result.
 - ego lite/`ego-browser` result.
+- Task cache directory.
+- Task progress file.
 - Required sites and login status.
 - Whether secondhand research is enabled.
 - Whether Sub Agent parallel search is authorized.

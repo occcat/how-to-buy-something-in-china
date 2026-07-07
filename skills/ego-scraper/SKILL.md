@@ -22,9 +22,10 @@ document.querySelectorAll('video').forEach(v => {
 });
 ```
 
-- Keep temporary browser automation scripts under `.cache/`.
+- Keep temporary browser automation scripts under the current task cache directory `.cache/<task_name>_<uuid>/`.
 - Delete temporary scripts after the task.
 - Do not leave screenshots, HTML dumps, debug logs, or scrape scripts in the repository root.
+- Store screenshots, HTML dumps, debug logs, scrape notes, and task progress only inside the current task cache directory.
 - Do not change user account settings, cart, favorites, address, payment, follow state, or subscriptions.
 
 ## Platform Categories
@@ -68,7 +69,7 @@ If evidence cannot be found, mark it as missing rather than filling the gap with
 
 ## Source Notes
 
-Record source notes in a structured scratch format, preferably `.cache/research_notes.jsonl`:
+Record source notes in a structured scratch format inside the current task cache directory, preferably `.cache/<task_name>_<uuid>/research_notes.jsonl`:
 
 ```json
 {"candidate":"产品 A","candidate_status":"qualified","platform_category":"社媒平台","site":"bilibili","type":"negative","claim":"游戏发热明显","url":"https://...","quote":"用户原话短摘","checked_at":"2026-07-06T12:00:00+08:00"}

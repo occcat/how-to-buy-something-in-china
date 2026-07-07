@@ -17,6 +17,7 @@ Use this skill after the candidate universe, qualified candidate set, exclusion 
 - If a longlist candidate violates a hard constraint, keep it out of the qualified candidate set and record the reason in the exclusion table.
 - Preserve source links from collection; do not invent links.
 - Preserve platform categories from collection: 社媒平台, 购买平台, 比价平台.
+- If table drafts, normalized JSON, CSV, or other scratch files are needed, write them only inside the current task cache directory `.cache/<task_name>_<uuid>/`.
 
 ## Specs Table
 

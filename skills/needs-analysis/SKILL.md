@@ -11,22 +11,26 @@ Use this skill at the start of every buying task. Do not recommend products unti
 
 ## Workflow
 
-1. Perform lightweight background search for the category or model.
+1. Confirm Plan-mode selectable UI is available, then create a dedicated task cache directory `.cache/<task_name>_<uuid>/`.
+   - Initialize a progress file such as `.cache/<task_name>_<uuid>/progress.md` or `.cache/<task_name>_<uuid>/progress.jsonl`.
+   - Record the task cache directory in every later stage output.
+   - Store all temporary files, task progress, and later login-state records inside this directory.
+2. Perform lightweight background search for the category or model.
    - Identify current market language, popular selling points, known pain points, model variants, rough price range, common traps, industry-leading companies/brands, current new releases, and previous-generation flagships that may still be competitive.
    - Keep this search shallow; the goal is better questions, not final conclusions.
-2. Ask tailored questions.
+3. Ask tailored questions.
    - Ask only questions that reduce decision uncertainty.
    - Every question must provide at least 3 concrete default options.
    - Use the Plan-mode selectable option UI. If it is unavailable, stop and ask the user to switch to Plan mode before continuing the buying workflow.
    - Put the recommended/default option first and label it as 推荐.
    - Include an open supplement such as “也可以直接补充你的真实情况”.
-3. Identify possible pseudo-needs.
+4. Identify possible pseudo-needs.
    - Translate surface preferences into possible underlying needs.
    - Confirm rather than assert. Example: “你说想要顶配，我理解可能是想多用几年不卡，还是主要为了游戏帧率？”
-4. Repeat at most 3 rounds.
+5. Repeat at most 3 rounds.
    - Each round must incorporate the user’s previous answer.
    - Stop early once budget, hard constraints, key scenarios, and unacceptable tradeoffs are clear.
-5. Produce the requirement profile for later stages.
+6. Produce the requirement profile for later stages.
 
 ## Question Design
 
@@ -79,6 +83,8 @@ End the stage with a compact profile:
 ```markdown
 ### 需求画像
 - 原始需求：
+- 任务缓存目录：
+- 任务进展文件：
 - 预算：
 - 核心场景：
 - 硬约束：

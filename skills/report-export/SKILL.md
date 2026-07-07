@@ -11,11 +11,12 @@ Use this skill at the end of the buying workflow to produce durable report files
 
 ## Git Hygiene
 
-- Write all report-generation intermediates and final artifacts only under ignored paths such as `.cache/` and `report/`.
+- Write report-generation intermediates only under the current task cache directory `.cache/<task_name>_<uuid>/`, and final Markdown/PDF artifacts only under `report/`.
 - Keep `.cache/` and `report/` ignored. Do not remove ignore rules to commit generated reports.
 - Do not modify tracked repository files during ordinary report generation unless the user explicitly asks for SOP, skill, script, or documentation changes.
 - Do not use `git add -f` for `.cache/`, `report/`, screenshots, HTML dumps, logs, temporary scripts, Markdown reports, or PDFs unless the user explicitly asks to version them.
-- Create temporary Node.js or browser automation scripts only under `.cache/`, and delete them immediately after use.
+- Create temporary Node.js or browser automation scripts only under the current task cache directory, and delete them immediately after use.
+- Keep task progress and export status in the current task cache directory, for example `.cache/<task_name>_<uuid>/progress.md`.
 
 ## Report Path
 
@@ -33,7 +34,7 @@ report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf
 ```
 
 Always split artifacts by type under the date directory. Do not place Markdown or PDF files directly under `report/YYYY-MM-DD/`.
-HTML is an intermediate artifact only. Write temporary HTML, CSS, and conversion assets under `.cache/`, not `report/`, and delete them immediately after the PDF exists and has been verified.
+HTML is an intermediate artifact only. Write temporary HTML, CSS, and conversion assets under the current task cache directory, not `report/` or `.cache/` root, and delete them immediately after the PDF exists and has been verified.
 The final chat response must include the full absolute PDF path, for example `/Users/.../report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf`. If PDF export is blocked, explicitly state that no PDF path exists and include the blocker plus the next executable command.
 
 Sanitize product names by removing `/`, `:`, `*`, `?`, `"`, `<`, `>`, `|`, newlines, and excessive spaces.
@@ -59,6 +60,7 @@ Section 1 must include:
 - User’s original request.
 - Clarified real needs and assumptions.
 - Hard constraints and unacceptable tradeoffs.
+- Current task cache directory and progress file path, without any sensitive login details.
 - Whether secondhand was accepted.
 - Which platforms were checked and any login/sub-agent authorization.
 - Data sources grouped into 社媒平台, 购买平台, and 比价平台, including any blocked or skipped platform category.
@@ -102,7 +104,7 @@ Section 4 must include:
 PDF export must use an HTML intermediate:
 
 1. Produce the final Markdown report under `report/YYYY-MM-DD/md/`.
-2. Render that Markdown or equivalent report structure into a styled temporary HTML file under `.cache/`.
+2. Render that Markdown or equivalent report structure into a styled temporary HTML file under `.cache/<task_name>_<uuid>/`.
 3. Convert the temporary HTML to `report/YYYY-MM-DD/pdf/产品名称-调研报告.pdf` using browser print/export, ego lite/`ego-browser`, Playwright/Chromium, `wkhtmltopdf`, `weasyprint`, or an existing project script that follows this HTML-to-PDF pipeline.
 4. Disable default headers and footers during conversion. The PDF must not contain tool-added title, URL, date, page number, browser header, or browser footer unless the user explicitly requested them.
 5. After confirming the PDF exists and passes basic visual/layout checks, delete the temporary HTML file and any CSS/assets created only for conversion.
@@ -117,7 +119,8 @@ Before final response, verify:
 - PDF file exists under `report/YYYY-MM-DD/pdf/` or the blocker is stated.
 - PDF was generated from a temporary HTML intermediate.
 - PDF has no automatically generated header or footer.
-- Temporary HTML/CSS/conversion assets created only for PDF export have been deleted.
+- Task cache directory exists under `.cache/<task_name>_<uuid>/` and contains task progress/export status when applicable.
+- Temporary HTML/CSS/conversion assets created only for PDF export have been deleted from the task cache directory.
 - `.cache/` and `report/` remain ignored and generated artifacts were not added to Git.
 - The report includes all 4 required sections.
 - Section 1 groups checked sources into 社媒平台, 购买平台, and 比价平台.
@@ -126,6 +129,6 @@ Before final response, verify:
 - Top 3 recommendations are present.
 - Final response includes the full absolute PDF path, or clearly states that PDF export was blocked.
 - Final response includes a Top 3 options-and-reasons table.
-- `.cache/` temporary scripts have been deleted.
+- Temporary scripts in the task cache directory have been deleted.
 - No temporary files were left in the repository root.
 - `git status --short` does not show report artifacts, caches, screenshots, HTML dumps, logs, or temporary scripts.

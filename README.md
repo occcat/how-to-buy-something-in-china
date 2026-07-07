@@ -61,8 +61,8 @@ ego lite 安装方式：
 │   └── report-export/                 # 阶段 5：Markdown/PDF 报告导出
 │       ├── SKILL.md
 │       └── agents/openai.yaml
-├── .cache/                            # 运行时缓存和临时脚本，Git 忽略
-│   └── ...                            # PDF 导出用临时 HTML/CSS 等中间格式，生成后删除
+├── .cache/                            # 任务级运行时缓存父目录，Git 忽略
+│   └── <task_name>_<uuid>/            # 单次任务的登录态、进展、抓取笔记、临时脚本和 PDF 中间格式
 └── report/                            # 最终调研报告输出目录，Git 忽略
     └── YYYY-MM-DD/                    # 按执行日期归档
         ├── md/                        # Markdown 报告
@@ -94,7 +94,7 @@ ego lite 安装方式：
 2. 阅读临时仓库里的 `README.md` 和 `AGENTS.md`，再按 `AGENTS.md` 的阶段流程与 `skills/` 目录执行。
 3. 继续前检查运行依赖：仅支持 macOS，且必须安装并能调用 ego lite/`ego-browser`；不满足时说明原因、给出 https://lite.ego.app 并退出。
 4. 在 Plan 模式中先问我“这次想买什么”，再用可选择选项澄清预算、场景、雷点、二手接受度、登录授权和并行搜索授权。
-5. 完成需求澄清、环境检查、候选长名单、证据采集、四张选型表格和最终 Top 3 推荐。
+5. 完成需求澄清、环境检查、候选长名单、证据采集、四张选型表格和最终 Top 3 推荐；每次任务必须创建 `.cache/<task_name>_<uuid>/`，登录态、进展、抓取笔记、临时脚本和 PDF 中间文件都放在这个任务目录里。
 6. 报告输出位置分两种情况：如果本次是按上文 clone/pull 得到 `$SOP_DIR`，则 `$SOP_DIR` 就是临时工作区，把 Markdown/PDF 输出到 `$SOP_DIR/report/YYYY-MM-DD/md/` 与 `$SOP_DIR/report/YYYY-MM-DD/pdf/`；如果你已经在本地已有项目里执行，则输出到该项目根目录的 `report/YYYY-MM-DD/md/` 与 `report/YYYY-MM-DD/pdf/`。最终回复给出 PDF 完整路径和 Top 3 理由表格。
 ```
 
