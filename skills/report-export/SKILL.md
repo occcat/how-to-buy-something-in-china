@@ -85,6 +85,7 @@ Section 3 must include:
 Section 4 must include:
 
 - Top 3 final recommendations.
+- Official product image for each Top 3 recommendation in the PDF when obtainable. Prefer images from the official website, brand store, official flagship store, or official product detail page; keep the image source link in the report. If no official image can be obtained, state the missing-image reason and do not substitute an unverified image.
 - Who each recommendation fits.
 - Who should avoid it.
 - Suggested buy price and wait/buy threshold.
@@ -97,6 +98,7 @@ Section 4 must include:
 - If no candidate satisfies hard constraints, recommend not buying now.
 - Keep price advice tied to the price table thresholds.
 - Call out evidence gaps that lower confidence.
+- The PDF Top 3 section should show official product images for the recommendations when available, with source links and missing-image notes as needed.
 - The final chat response must include a Top 3 options-and-reasons table with at least: rank, recommendation, core reason, who it fits, who should avoid it, suggested price, and pitfalls.
 
 ## PDF Export
@@ -127,6 +129,7 @@ Before final response, verify:
 - Tables contain source links for claims and prices.
 - Exclusion reasons table is present when any relevant longlist item was not included.
 - Top 3 recommendations are present.
+- PDF Top 3 recommendations include official product images when obtainable, or explicit missing-image reasons.
 - Final response includes the full absolute PDF path, or clearly states that PDF export was blocked.
 - Final response includes a Top 3 options-and-reasons table.
 - Temporary scripts in the task cache directory have been deleted.
