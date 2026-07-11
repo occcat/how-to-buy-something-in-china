@@ -1,6 +1,6 @@
 ---
 name: env-check
-description: Check prerequisites for China shopping research including macOS support, ego lite or ego-browser availability, safe login-state caching, required platform login checks for social-platform, purchase-platform, and price-comparison sites, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
+description: Check prerequisites for China shopping research including macOS support, ego lite or ego-browser availability, deterministic LaTeX PDF toolchain selection, safe task-level environment and login-state caching, required platform login checks, and explicit Sub Agent authorization. Use after needs are clarified and before any deep web collection.
 ---
 
 # Env Check
@@ -15,10 +15,15 @@ Use this skill after requirements are clarified and before collecting data from 
 2. If the OS is not macOS, stop and tell the user ego lite currently supports macOS only.
 3. If ego lite or `ego-browser` is missing, direct the user to install it from https://lite.ego.app.
 4. Create or reuse the current task cache directory `.cache/<task_name>_<uuid>/`; do not write task files directly under `.cache/`.
-5. Check platform login state only for sites required by the current research.
-6. Cache login state in `.cache/<task_name>_<uuid>/login_status.json`.
-7. Ask for manual扫码登录 only when the needed login state is missing.
-8. Ask whether Sub Agent parallel search is allowed and disclose higher Token cost. This prompt has exactly two options: `不并行（推荐）` and `并行`.
+5. Deterministically probe the LaTeX export toolchain and cache the result in `.cache/<task_name>_<uuid>/export_toolchain.json`.
+6. Select a Chinese-report-capable engine in this fixed order: `xelatex`, `lualatex`, then `tectonic`. A tool is selectable only when it is found and its version probe succeeds.
+7. Record `latexmk` and `pandoc` as auxiliary tools only. Neither tool, alone or together, proves that a LaTeX PDF can be compiled.
+8. Record `pdflatex` as limited capability only. Do not treat it as the default compiler for a Chinese report and do not mark the LaTeX Chinese-report path ready when it is the only engine found.
+9. Append the selected export capability and engine to the task's `progress.md`.
+10. Check platform login state only for sites required by the current research.
+11. Cache login state in `.cache/<task_name>_<uuid>/login_status.json`.
+12. Ask for manual扫码登录 only when the needed login state is missing.
+13. Ask whether Sub Agent parallel search is allowed and disclose higher Token cost. This prompt has exactly two options: `不并行（推荐）` and `并行`.
 
 ## Task Cache Directory
 
@@ -34,8 +39,62 @@ Rules:
 - `uuid` must be generated with `uuidgen` or an equivalent UUID generator.
 - Use `SHOPPING_TASK_CACHE_DIR` when stage 1 already created the task directory.
 - Otherwise pass the task name as the first argument, for example `skills/env-check/check_env.sh "扫地机器人"`.
-- Store task progress, login status, scrape notes, screenshots, logs, temporary browser scripts, and PDF conversion intermediates inside this directory.
-- Do not write `.cache/login_status.json` or other root-level per-task files.
+- Store task progress, export-toolchain status, login status, scrape notes, screenshots, logs, temporary browser scripts, and PDF conversion intermediates inside this directory.
+- Do not write `.cache/login_status.json`, `.cache/export_toolchain.json`, or other root-level per-task files.
+
+## LaTeX Export Toolchain
+
+`check_env.sh` must write the deterministic probe result to:
+
+```text
+.cache/<task_name>_<uuid>/export_toolchain.json
+```
+
+Selection rules:
+
+1. Probe all supported commands and distinguish `found` from `usable`. Check `PATH` first, then common macOS and user install locations such as `/Library/TeX/texbin`, `/opt/homebrew/bin`, `/usr/local/bin`, `~/.cargo/bin`, and `~/.local/bin`. `usable` means the resolved executable's version probe completed successfully; it is not merely a shell alias or function.
+2. Select the first usable engine in this fixed order: `xelatex`, `lualatex`, `tectonic`.
+3. When one of those engines is selected, set `chinese_report_ready` to `true` and `capability` to `chinese_latex_pdf`.
+4. When none is usable but `pdflatex` is usable, leave `selected_engine` as `null`, set `chinese_report_ready` to `false`, and set `capability` to `limited_pdflatex`.
+5. Otherwise set `capability` to `unavailable`.
+6. `latexmk` and `pandoc` are always auxiliary records. Their presence must not change `chinese_report_ready` or choose an engine.
+7. Downstream report export should prefer the LaTeX PDF path only when `chinese_report_ready` is `true`; otherwise use the documented non-LaTeX fallback.
+
+`chinese_report_ready` is a deterministic route-selection signal based on executable discovery and a successful version probe. Initialize `runtime_validation.status` as `not_run`; the report-export stage must update it after a real Chinese compilation and validate fonts, text, tables, links, and images before publishing the PDF.
+
+The file schema is:
+
+```json
+{
+  "checked_at": "2026-07-11T12:00:00+08:00",
+  "latex_pdf": {
+    "chinese_report_ready": true,
+    "selected_engine": "xelatex",
+    "capability": "chinese_latex_pdf",
+    "selection_reason": "selected the first usable Chinese-report engine by fixed priority: xelatex > lualatex > tectonic",
+    "runtime_validation": {
+      "status": "not_run",
+      "checked_at": null,
+      "note": "report-export must validate a real Chinese document before publishing"
+    }
+  },
+  "tools": {
+    "xelatex": {
+      "found": true,
+      "usable": true,
+      "path": "/Library/TeX/texbin/xelatex",
+      "version": "XeTeX ..."
+    },
+    "lualatex": { "found": false, "usable": false, "path": null, "version": null },
+    "tectonic": { "found": false, "usable": false, "path": null, "version": null },
+    "pdflatex": { "found": false, "usable": false, "path": null, "version": null },
+    "latexmk": { "found": false, "usable": false, "path": null, "version": null },
+    "pandoc": { "found": false, "usable": false, "path": null, "version": null }
+  }
+}
+```
+
+Do not store environment variables, shell configuration, document contents, or other unrelated machine details in this file.
 
 ## Platform Selection
 
@@ -109,6 +168,7 @@ End the stage with:
 - ego lite/`ego-browser` result.
 - Task cache directory.
 - Task progress file.
+- Export toolchain cache file, selected LaTeX engine, and Chinese-report readiness.
 - Required sites and login status.
 - Whether secondhand research is enabled.
 - Whether Sub Agent parallel search is authorized.
